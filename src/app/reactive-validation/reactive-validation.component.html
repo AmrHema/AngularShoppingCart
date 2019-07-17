@@ -1,0 +1,49 @@
+<form [formGroup]="form"  (ngSubmit)="submit(form)">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" aria-describedby="emailHelp"
+     id="email" name="email" 
+     #testMail  formControlName="email" placeholder="Enter email">
+     <p *ngIf="email.pending">Check Email in DB
+
+      <img style="width: 100px;height: 100px;" src="https://media.giphy.com/media/LY0f5SO4HFHVu/giphy.gif" alt="">
+     </p>
+     <b>{{testMail.className}}</b>
+    <div *ngIf="email.touched && email.invalid" class="alert alert-danger" role="alert">
+      <div *ngIf="email.errors && email.errors.required">
+        Email is required
+      </div>
+      <div *ngIf="email.errors && email.errors.maxlength">
+          Email cannot exceded 10 characterd
+        </div>
+      <p *ngIf="email.errors?.email">Email invalid</p>
+      
+      <p *ngIf="email.errors?.ShouldUnique">Email is Already Exist</p>
+
+      
+    </div>
+
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" name="password" formControlName="password"
+      placeholder="Password">
+    <div *ngIf="password.touched && password.invalid" class="alert alert-danger" role="alert">
+      <div *ngIf="password.errors && password.errors.required">
+        password is required
+      </div>
+      <p *ngIf="password.errors?.min">
+        Please enter atleast {{password.errors.minlength.requiredLength}} characters
+      </p>
+      <p *ngIf="password.errors?.equal">password must be 54321</p>
+      <p *ngIf="password.errors?.noSpaceAllowed">No Space Allowed</p>
+    </div>
+
+  </div>
+
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Submit</button>
+</form>

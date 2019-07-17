@@ -1,0 +1,49 @@
+<form #f="ngForm" (ngSubmit)="submit(f)">
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" name="email" ngModel #email="ngModel" autocomplete="off" (change)="Log(email)"
+      class="form-control" required minlength="10" maxlength="20"
+      pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" email id="email" aria-describedby="emailHelp"
+      placeholder="Enter email">
+
+    
+    <div *ngIf="email.touched && email.invalid" class="alert alert-danger" role="alert">
+      <div *ngIf="email.errors && email.errors.required">
+        Email is required
+      </div>
+      <div *ngIf="email.errors && email.errors.pattern">
+        Email is invalid
+      </div>
+      <div *ngIf="email.errors && email.errors.minlength">
+       Please enter atleast {{email.errors.minlength.requiredLength}} characters
+      </div>
+      <p *ngIf="email.errors?.email">error message</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="password" placeholder="Password" name="password"
+     ngModel      #password="ngModel" required minlength="5" number [equal]="'123456'">
+      <b>{{password.className}}</b>
+    <div *ngIf="password.touched && password.invalid" class="alert alert-danger" role="alert">
+      <div *ngIf="password.errors && password.errors.required">
+        password is required
+      </div>
+      <!-- <div *ngIf="password.errors && password.errors.pattern">
+        password is invalid
+      </div> -->
+
+
+      <div *ngIf="password.errors && password.errors.minlength">
+        Please enter atleast {{password.errors.minlength.requiredLength}} characters
+      </div>
+      <p *ngIf="password.errors?.number">Password must be Number</p>
+      <p *ngIf="password.errors?.equal">Password must be Number 123456</p>
+    </div>
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" [disabled]="f.form.invalid" class="btn btn-primary">Submit</button>
+</form>

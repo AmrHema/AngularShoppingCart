@@ -1,0 +1,52 @@
+<form [formGroup]="form"  (ngSubmit)="CreatePost(form)">
+  <div class="form-group">
+    <input type="text" class="form-control" aria-describedby="emailHelp"
+     id="userId	" name="userId" required
+     #testMail  formControlName="userId" placeholder="Enter userId">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" aria-describedby="emailHelp"
+     id="id	" name="id" required
+     #testMail  formControlName="id" placeholder="Enter id">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" aria-describedby="emailHelp"
+     id="title" name="title" required
+     #testMail  formControlName="title" placeholder="Enter title">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" aria-describedby="emailHelp"
+     id="body" name="body" required
+     #testMail  formControlName="body" placeholder="Enter body">
+  </div>
+  <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+
+
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>userId</th>
+      <th>id</th>
+      <th>title</th>
+      <th>body</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of posts">
+      <td>{{post.userId}}</td>
+      <td>{{post.id}}</td>
+      <td>{{post.title}}</td>
+      <td>{{post.body}}</td>
+      <td><button (click)="UpdatePost(post, form)" class="btn btn-primary">Edit</button></td>
+      <td><button (click)="DeletePost(post)" class="btn btn-danger">Delete</button></td>
+
+    </tr>
+  </tbody>
+</table>
